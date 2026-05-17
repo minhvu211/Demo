@@ -1,0 +1,2321 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thanh Xuân Của Chúng Ta - Kỷ Yếu</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #c9a0c9;
+    --pink-light: #e8d5e8;
+    --pink-dark: #9b6b9b;
+    --blue-muted: #8fafc0;
+    --text-dark: #2d2d2d;
+    --text-gray: #666;
+    --bg: #f9f7f7;
+    --white: #fff;
+    --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgba(0,0,0,0.06);
+    transition: background 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.2s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--pink), var(--blue-muted));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    border-radius: 2px;
+  }
+
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+  .nav-links a:hover { color: var(--pink-dark); }
+
+  /* HERO */
+  #home {
+    width: 100%;
+    aspect-ratio: 3 / 2; /* khớp với ảnh welcome.png 1536x1024 */
+    min-height: 100vh;
+    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .result-gif{
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.38) 100%),
+      url('welcome.png') center center / contain no-repeat;
+    background-color: #1f1713;
+    animation: heroZoom 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes heroZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+  }
+
+  .hero-content { position: relative; z-index: 2; padding: 0 20px; }
+
+  .hero-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    color: white;
+    font-weight: 700;
+    text-shadow: 2px 4px 20px rgba(0,0,0,0.4);
+    line-height: 1.1;
+    animation: fadeUp 1s ease both;
+  }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.1rem;
+    margin-top: 18px;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+
+  .hero-btn {
+    margin-top: 38px;
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    border: 1.5px solid rgba(255,255,255,0.6);
+    color: white;
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+
+  .hero-btn:hover {
+    background: rgba(255,255,255,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    z-index: 2; color: rgba(255,255,255,0.8); text-align: center;
+    animation: fadeIn 2s 1s ease both;
+  }
+
+  .scroll-hint span { font-size: 0.75rem; letter-spacing: 3px; display: block; margin-bottom: 8px; }
+
+  .scroll-mouse {
+    width: 26px; height: 42px;
+    border: 2px solid rgba(255,255,255,0.7);
+    border-radius: 13px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .scroll-mouse::before {
+    content: '';
+    position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+    width: 4px; height: 8px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 2px;
+    animation: scrollDot 2s infinite;
+  }
+
+  @keyframes scrollDot {
+    0% { opacity: 1; top: 6px; }
+    100% { opacity: 0; top: 24px; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* SECTIONS COMMON */
+  section {
+    padding: 90px 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 14px;
+    color: var(--text-dark);
+  }
+
+  .section-divider {
+    width: 60px; height: 4px;
+    background: linear-gradient(90deg, var(--pink), var(--blue-muted));
+    border-radius: 2px;
+    margin: 0 auto 60px;
+  }
+
+  /* MEMBERS */
+  #members { background: white; max-width: 100%; padding: 90px 0; }
+  #members > * { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 60px; padding-right: 60px; }
+  #members .section-title, #members .section-divider { margin-left: auto; margin-right: auto; }
+
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding: 0 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .member-card {
+    background: white;
+    border-radius: var(--radius);
+    border: 1.5px solid #eee;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+
+  .member-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--card-shadow);
+  }
+
+  .member-img-wrap {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    position: relative;
+    background: #e8e8e8;
+  }
+
+  .member-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s;
+  }
+
+  .member-card:hover .member-img-wrap img { transform: scale(1.05); }
+
+  .member-hover-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 20px;
+    color: white;
+  }
+
+  .member-card:hover .member-hover-overlay { opacity: 1; }
+
+  .member-quote {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1rem;
+    font-style: italic;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .member-see-more {
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .member-name-wrap {
+    padding: 16px 20px;
+    text-align: center;
+  }
+
+  .member-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+
+  .member-nickname {
+    font-family: 'Dancing Script', cursive;
+    font-size: 0.95rem;
+    color: var(--pink-dark);
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: white;
+    border-radius: 24px;
+    width: 90%; max-width: 480px;
+    padding: 36px 36px 40px;
+    position: relative;
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.3s;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+  .modal-close {
+    position: absolute; top: 16px; right: 18px;
+    background: none; border: none;
+    font-size: 1.4rem; cursor: pointer;
+    color: #999; transition: color 0.2s;
+  }
+
+  .modal-close:hover { color: #333; }
+
+  .modal-avatar {
+    width: 100px; height: 100px;
+    border-radius: 20px;
+    object-fit: cover;
+    margin: 0 auto 16px;
+    display: block;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+
+  .modal-fullname {
+    text-align: center;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+
+  .modal-nick {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: var(--pink-dark);
+    margin-top: 4px;
+  }
+
+  .modal-divider {
+    border: none; border-top: 1px solid #eee;
+    margin: 22px 0 18px;
+  }
+
+  .modal-field {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .modal-icon {
+    width: 34px; height: 34px;
+    background: var(--pink-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+
+  .modal-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #aaa;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .modal-value {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    font-weight: 500;
+  }
+
+  /* GALLERY */
+  #gallery { background: var(--bg); }
+
+  .gallery-grid {
+    columns: 4;
+    column-gap: 12px;
+    gap: 12px;
+  }
+
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .gallery-item img {
+    width: 100%; display: block;
+    transition: transform 0.4s;
+  }
+
+  .gallery-item:hover img { transform: scale(1.04); }
+
+  /* TIMELINE */
+  #timeline { background: white; max-width: 100%; padding: 90px 0; }
+  #timeline .section-title, #timeline .section-divider {
+    max-width: 1200px; margin-left: auto; margin-right: auto;
+    padding-left: 60px; padding-right: 60px;
+  }
+  #timeline .section-title { padding-left: 60px; padding-right: 60px; }
+
+  .timeline-wrap {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, var(--pink-light), var(--blue-muted), var(--pink-light));
+  }
+
+  .timeline-item {
+    display: flex;
+    margin-bottom: 60px;
+    position: relative;
+    align-items: flex-start;
+  }
+
+  .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+
+  .timeline-card {
+    width: calc(50% - 40px);
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .timeline-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+
+  .timeline-item:nth-child(odd) .timeline-card { text-align: right; }
+
+  .timeline-dot {
+    position: absolute;
+    left: 50%; transform: translateX(-50%);
+    width: 16px; height: 16px;
+    background: var(--white);
+    border: 3px solid var(--blue-muted);
+    border-radius: 50%;
+    top: 24px;
+    z-index: 1;
+  }
+
+  .timeline-month {
+    font-size: 0.85rem;
+    color: var(--blue-muted);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .timeline-event-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+  }
+
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    line-height: 1.65;
+  }
+
+  /* LUU BUT - STICKY NOTES BOARD */
+  #messages {
+    background: #d4c5b0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(0,0,0,0.04) 27px, rgba(0,0,0,0.04) 28px),
+      repeating-linear-gradient(90deg, transparent, transparent 27px, rgba(0,0,0,0.03) 27px, rgba(0,0,0,0.03) 28px);
+  }
+
+  .notes-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px 28px;
+    padding: 10px 4px 20px;
+  }
+
+  .note-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .sticky-note {
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+    padding: 38px 22px 24px;
+    border-radius: 3px;
+    box-shadow:
+      3px 3px 8px rgba(0,0,0,0.18),
+      6px 6px 20px rgba(0,0,0,0.1),
+      inset 0 -2px 4px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+
+  /* Slight random tilts per position */
+  .notes-board .note-wrap:nth-child(1) .sticky-note  { transform: rotate(-1.8deg); }
+  .notes-board .note-wrap:nth-child(2) .sticky-note  { transform: rotate(1.2deg);  }
+  .notes-board .note-wrap:nth-child(3) .sticky-note  { transform: rotate(-0.7deg); }
+  .notes-board .note-wrap:nth-child(4) .sticky-note  { transform: rotate(2deg);    }
+  .notes-board .note-wrap:nth-child(5) .sticky-note  { transform: rotate(-1.4deg); }
+  .notes-board .note-wrap:nth-child(6) .sticky-note  { transform: rotate(0.9deg);  }
+  .notes-board .note-wrap:nth-child(7) .sticky-note  { transform: rotate(-2.2deg); }
+  .notes-board .note-wrap:nth-child(8) .sticky-note  { transform: rotate(1.6deg);  }
+  .notes-board .note-wrap:nth-child(9) .sticky-note  { transform: rotate(-0.5deg); }
+  .notes-board .note-wrap:nth-child(10) .sticky-note { transform: rotate(1.9deg);  }
+  .notes-board .note-wrap:nth-child(11) .sticky-note { transform: rotate(-1.1deg); }
+  .notes-board .note-wrap:nth-child(12) .sticky-note { transform: rotate(2.3deg);  }
+  .notes-board .note-wrap:nth-child(13) .sticky-note { transform: rotate(-1.7deg); }
+  .notes-board .note-wrap:nth-child(14) .sticky-note { transform: rotate(0.8deg);  }
+  .notes-board .note-wrap:nth-child(15) .sticky-note { transform: rotate(-2.0deg); }
+  .notes-board .note-wrap:nth-child(16) .sticky-note { transform: rotate(1.4deg);  }
+  .notes-board .note-wrap:nth-child(17) .sticky-note { transform: rotate(-0.9deg); }
+  .notes-board .note-wrap:nth-child(18) .sticky-note { transform: rotate(2.1deg);  }
+  .notes-board .note-wrap:nth-child(19) .sticky-note { transform: rotate(-1.5deg); }
+  .notes-board .note-wrap:nth-child(20) .sticky-note { transform: rotate(0.6deg);  }
+  .notes-board .note-wrap:nth-child(21) .sticky-note { transform: rotate(-2.3deg); }
+  .notes-board .note-wrap:nth-child(22) .sticky-note { transform: rotate(1.0deg);  }
+  .notes-board .note-wrap:nth-child(23) .sticky-note { transform: rotate(-1.3deg); }
+  .notes-board .note-wrap:nth-child(24) .sticky-note { transform: rotate(2.2deg);  }
+  .notes-board .note-wrap:nth-child(25) .sticky-note { transform: rotate(-0.6deg); }
+  .notes-board .note-wrap:nth-child(26) .sticky-note { transform: rotate(1.7deg);  }
+  .notes-board .note-wrap:nth-child(27) .sticky-note { transform: rotate(-2.1deg); }
+  .notes-board .note-wrap:nth-child(28) .sticky-note { transform: rotate(0.4deg);  }
+  .notes-board .note-wrap:nth-child(29) .sticky-note { transform: rotate(-1.6deg); }
+  .notes-board .note-wrap:nth-child(30) .sticky-note { transform: rotate(2.4deg);  }
+  .notes-board .note-wrap:nth-child(31) .sticky-note { transform: rotate(-0.8deg); }
+  .notes-board .note-wrap:nth-child(32) .sticky-note { transform: rotate(1.3deg);  }
+  .notes-board .note-wrap:nth-child(33) .sticky-note { transform: rotate(-1.9deg); }
+  .notes-board .note-wrap:nth-child(34) .sticky-note { transform: rotate(0.7deg);  }
+  .notes-board .note-wrap:nth-child(35) .sticky-note { transform: rotate(-1.2deg); }
+  .notes-board .note-wrap:nth-child(36) .sticky-note { transform: rotate(2.0deg);  }
+  .notes-board .note-wrap:nth-child(37) .sticky-note { transform: rotate(-0.4deg); }
+  .notes-board .note-wrap:nth-child(38) .sticky-note { transform: rotate(1.8deg);  }
+  .notes-board .note-wrap:nth-child(39) .sticky-note { transform: rotate(-2.2deg); }
+  .notes-board .note-wrap:nth-child(40) .sticky-note { transform: rotate(1.1deg);  }
+  .notes-board .note-wrap:nth-child(41) .sticky-note { transform: rotate(-1.0deg); }
+
+  /* Hidden extra notes */
+  .note-wrap.note-hidden {
+    display: none;
+  }
+
+  /* Show more button */
+  .notes-show-more-wrap {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 4px;
+  }
+
+  .notes-show-more-btn {
+    background: rgba(255,255,255,0.75);
+    border: 2px dashed rgba(0,0,0,0.2);
+    border-radius: 50px;
+    padding: 12px 36px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: rgba(0,0,0,0.55);
+    cursor: pointer;
+    transition: all 0.25s;
+    backdrop-filter: blur(4px);
+    letter-spacing: 0.03em;
+  }
+
+  .notes-show-more-btn:hover {
+    background: rgba(255,255,255,0.95);
+    color: rgba(0,0,0,0.75);
+    border-color: rgba(0,0,0,0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  }
+
+  .sticky-note:hover {
+    transform: rotate(0deg) translateY(-6px) scale(1.03) !important;
+    box-shadow:
+      4px 8px 18px rgba(0,0,0,0.22),
+      10px 14px 30px rgba(0,0,0,0.13);
+    z-index: 10;
+  }
+
+  /* Fold corner effect bottom-right */
+  .sticky-note::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 22px; height: 22px;
+    background: linear-gradient(225deg, rgba(0,0,0,0.13) 50%, transparent 50%);
+    border-radius: 0 0 3px 0;
+  }
+
+  /* Note colors */
+  .note-yellow  { background: #fff176; }
+  .note-pink    { background: #f8bbd0; }
+  .note-blue    { background: #b3e5fc; }
+  .note-green   { background: #c8e6c9; }
+  .note-purple  { background: #e1bee7; }
+  .note-peach   { background: #ffe0b2; }
+
+  /* Ruled lines on note */
+  .sticky-note {
+    background-image: repeating-linear-gradient(
+      transparent, transparent 27px,
+      rgba(0,0,0,0.07) 27px, rgba(0,0,0,0.07) 28px
+    );
+    background-position: 0 36px;
+  }
+
+  /* PIN */
+  .note-pin {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35), inset 0 -2px 3px rgba(0,0,0,0.2), inset 0 1px 2px rgba(255,255,255,0.5);
+    z-index: 5;
+  }
+
+  .note-pin::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 8px;
+    background: linear-gradient(to bottom, #aaa, #888);
+    border-radius: 0 0 2px 2px;
+  }
+
+  .pin-red    { background: radial-gradient(circle at 35% 35%, #ff6b6b, #c0392b); }
+  .pin-blue   { background: radial-gradient(circle at 35% 35%, #74b9ff, #2980b9); }
+  .pin-yellow { background: radial-gradient(circle at 35% 35%, #fdcb6e, #e17055); }
+  .pin-green  { background: radial-gradient(circle at 35% 35%, #55efc4, #00b894); }
+  .pin-purple { background: radial-gradient(circle at 35% 35%, #a29bfe, #6c5ce7); }
+  .pin-white  { background: radial-gradient(circle at 35% 35%, #fff, #dfe6e9); }
+
+  /* TAPE */
+  .note-tape {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 60px;
+    height: 22px;
+    background: rgba(200, 220, 255, 0.55);
+    border-left: 1px solid rgba(150,180,255,0.3);
+    border-right: 1px solid rgba(150,180,255,0.3);
+    backdrop-filter: blur(1px);
+    z-index: 5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+
+  .note-tape::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent, transparent 4px,
+      rgba(180,200,255,0.25) 4px, rgba(180,200,255,0.25) 5px
+    );
+  }
+
+  /* Content inside note */
+  .note-from {
+    font-size: 0.68rem;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: rgba(0,0,0,0.45);
+    margin-bottom: 10px;
+  }
+
+  .note-text {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: rgba(0,0,0,0.72);
+    font-style: italic;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .note-sig {
+    margin-top: 14px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: rgba(0,0,0,0.6);
+    font-style: normal;
+  }
+
+  /* MUSIC */
+  #music { background: white; max-width: 100%; padding: 90px 0; }
+  #music .section-title, #music .section-divider {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 60px;
+  }
+  #music .section-title { display: block; }
+
+  .music-player {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  .playlist {
+    background: var(--bg);
+    border-radius: 20px;
+    padding: 24px;
+    list-style: none;
+  }
+
+  .playlist-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .playlist-item:hover, .playlist-item.active { background: white; }
+  .playlist-item.active .pl-title { color: var(--pink-dark); }
+
+  .pl-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--pink-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--pink-dark);
+    flex-shrink: 0;
+  }
+
+  .pl-title { font-weight: 600; font-size: 0.95rem; }
+  .pl-artist { font-size: 0.82rem; color: var(--text-gray); margin-top: 1px; }
+
+  .pl-duration { margin-left: auto; font-size: 0.82rem; color: var(--text-gray); }
+
+  /* FOOTER */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 36px 20px;
+    font-size: 0.9rem;
+  }
+
+  footer .footer-logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  /* PLACEHOLDER IMAGES */
+  .ph {
+    background: linear-gradient(135deg, #f0e6f0, #e0eaf5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    color: rgba(0,0,0,0.15);
+  }
+
+  /* ============ INTRO SCREEN ============ */
+  #intro-screen {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    background: #eef3f8;
+  }
+
+  /* Animated ripple/wave background */
+  .intro-bg {
+    position: absolute; inset: 0;
+    overflow: hidden;
+  }
+
+  .ripple-svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+
+  /* Floating petals */
+  .petal {
+    position: absolute;
+    width: 10px; height: 14px;
+    border-radius: 50% 0 50% 0;
+    opacity: 0.35;
+    animation: petalFall linear infinite;
+  }
+
+  @keyframes petalFall {
+    0%   { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.35; }
+    90%  { opacity: 0.25; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Quiz Card */
+  .quiz-card {
+    position: relative; z-index: 2;
+    background: white;
+    border-radius: 24px;
+    width: min(480px, 92vw);
+    box-shadow: 0 20px 60px rgba(100,130,180,0.15);
+    overflow: hidden;
+    animation: cardAppear 0.8s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+
+  @keyframes cardAppear {
+    from { opacity: 0; transform: scale(0.8) translateY(40px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .quiz-photo {
+    width: 100%; height: 200px; object-fit: cover;
+    display: block;
+  }
+
+  .quiz-photo-placeholder {
+    width: 100%; height: 200px;
+    background: linear-gradient(135deg, #c5d8e8, #dcc5e0);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+  }
+
+  .quiz-body { padding: 28px 28px 32px; }
+
+  .quiz-q {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .quiz-choices {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .quiz-btn {
+    background: #f5f7fa;
+    border: 1.5px solid #e8ecf0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .quiz-btn:hover {
+    background: var(--pink-light);
+    border-color: var(--pink);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(180,130,180,0.2);
+  }
+
+  .quiz-btn.wrong {
+    background: #ffe5e5; border-color: #f5a0a0;
+    animation: shake 0.4s ease;
+    color: #c0392b;
+  }
+
+  .quiz-btn.correct {
+    background: #e5f5e5; border-color: #82c982;
+    color: #2d7d2d;
+  }
+
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+  }
+
+  /* Result popups */
+  .quiz-result {
+    position: absolute; inset: 0;
+    background: white;
+    border-radius: 24px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 36px 32px;
+    text-align: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 5;
+  }
+
+  .quiz-result.show { opacity: 1; pointer-events: all; }
+
+  .result-mascot { font-size: 4.5rem; margin-bottom: 16px; animation: mascotBounce 0.6s ease; }
+
+  @keyframes mascotBounce {
+    0%   { transform: scale(0) rotate(-10deg); }
+    60%  { transform: scale(1.15) rotate(5deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+
+  .result-title {
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--text-dark); margin-bottom: 8px;
+  }
+
+  .result-sub { font-size: 0.9rem; color: var(--text-gray); margin-bottom: 24px; }
+
+  .result-btn {
+    padding: 14px 32px;
+    border: none; border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+  }
+
+  .result-btn.retry {
+    background: #ff6b6b; color: white;
+  }
+
+  .result-btn.enter {
+    background: linear-gradient(135deg, #6ab9d4, #b48ec4);
+    color: white;
+    box-shadow: 0 8px 24px rgba(100,160,200,0.3);
+  }
+
+  .result-btn:hover { transform: translateY(-2px) scale(1.03); }
+
+  /* Countdown dot */
+  .result-countdown {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: #bbb;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  /* Intro exit — fade + gentle scale */
+  #intro-screen {
+    transition: opacity 1s cubic-bezier(0.4,0,0.2,1),
+                transform 1s cubic-bezier(0.4,0,0.2,1);
+  }
+  #intro-screen.exit {
+    opacity: 0;
+    transform: scale(1.05);
+    pointer-events: none;
+  }
+
+  /* Main site slides up from slightly below */
+  #main-site {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease 0.4s, transform 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s;
+  }
+  #main-site.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hero text cinematic entrance */
+  #home .reveal {
+    transition: opacity 1s ease, transform 1s cubic-bezier(0.22,1,0.36,1);
+  }
+  #home .reveal.d1 { transition-delay: 0.5s; }
+  #home .reveal.d2 { transition-delay: 0.75s; }
+  #home .reveal.d3 { transition-delay: 1s; }
+
+  /* confetti burst */
+  .confetti-piece {
+    position: absolute; width: 8px; height: 8px;
+    border-radius: 2px;
+    animation: confettiFly 1s ease-out forwards;
+    pointer-events: none; z-index: 10;
+  }
+
+  @keyframes confettiFly {
+    0%   { opacity: 1; transform: translate(0,0) rotate(0deg) scale(1); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(720deg) scale(0.5); }
+  }
+
+  /* ============ SCROLL-REVEAL ANIMATIONS ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.from-left  { transform: translateX(-50px); }
+  .reveal.from-right { transform: translateX(50px); }
+  .reveal.scale-in   { transform: scale(0.88); }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translate(0) scale(1);
+  }
+
+  /* Stagger delays */
+  .reveal.d1 { transition-delay: 0.1s; }
+  .reveal.d2 { transition-delay: 0.2s; }
+  .reveal.d3 { transition-delay: 0.3s; }
+  .reveal.d4 { transition-delay: 0.4s; }
+  .reveal.d5 { transition-delay: 0.5s; }
+  .reveal.d6 { transition-delay: 0.6s; }
+
+  /* Floating hearts decoration */
+  .float-hearts {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+    opacity: 0; transition: opacity 1s 1s;
+  }
+
+  .float-hearts.show { opacity: 1; }
+
+  .fheart {
+    position: absolute; font-size: 1rem;
+    animation: heartFloat linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes heartFloat {
+    0%   { transform: translateY(0) scale(0.8); opacity: 0; }
+    10%  { opacity: 0.3; }
+    90%  { opacity: 0.15; }
+    100% { transform: translateY(-100vh) scale(1.2) rotate(20deg); opacity: 0; }
+  }
+
+  /* Nav active underline */
+  .nav-links a.active { color: var(--pink-dark); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    #home {
+      aspect-ratio: 3 / 2;
+      min-height: 70vh;
+    }
+
+    nav { padding: 14px 20px; }
+    .nav-links { gap: 18px; }
+    section, #members, #timeline { padding: 60px 20px; }
+    .members-grid { grid-template-columns: repeat(2, 1fr); padding: 0 20px; }
+    .gallery-grid { columns: 2; }
+    .timeline-wrap { padding: 0 20px; }
+    .messages-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============ MUSIC POPUP PANEL ============ */
+  #music-panel {
+    position: fixed;
+    top: 64px;
+    right: 32px;
+    z-index: 2999;
+    width: 320px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 16px 50px rgba(0,0,0,0.14);
+    overflow: hidden;
+    transform: translateY(-10px) scale(0.96);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.34,1.4,0.64,1);
+  }
+
+  #music-panel.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0) scale(1);
+  }
+
+  .mp-header {
+    padding: 18px 20px 14px;
+    background: linear-gradient(135deg, #f5eef8, #eaf2f8);
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .mp-header-icon {
+    font-size: 1.2rem;
+  }
+
+  .mp-header-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    flex: 1;
+  }
+
+  .mp-close {
+    background: none; border: none;
+    font-size: 1rem; color: #bbb;
+    cursor: pointer; transition: color 0.2s;
+    line-height: 1;
+    padding: 2px;
+  }
+  .mp-close:hover { color: #666; }
+
+  /* Now playing bar */
+  .mp-now {
+    padding: 12px 20px;
+    background: linear-gradient(90deg, rgba(201,160,201,0.12), rgba(143,175,192,0.12));
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid #f5f5f5;
+  }
+
+  .mp-now-disc {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink-dark), var(--blue-muted));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .mp-now-disc.spinning {
+    animation: discSpin 3s linear infinite;
+  }
+
+  @keyframes discSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .mp-now-info { flex: 1; min-width: 0; }
+
+  .mp-now-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .mp-now-sub {
+    font-size: 0.75rem;
+    color: var(--text-gray);
+    margin-top: 1px;
+  }
+
+  /* Controls */
+  .mp-controls {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    padding: 10px 20px 12px;
+    border-bottom: 1px solid #f5f5f5;
+  }
+
+  .mp-ctrl-btn {
+    background: none; border: none;
+    font-size: 1rem; cursor: pointer;
+    color: var(--text-gray);
+    transition: color 0.2s, transform 0.15s;
+    padding: 4px;
+    line-height: 1;
+  }
+
+  .mp-ctrl-btn:hover { color: var(--pink-dark); transform: scale(1.15); }
+
+  .mp-play-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink-dark), var(--blue-muted));
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 3px 12px rgba(155,107,155,0.35);
+  }
+
+  .mp-play-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 18px rgba(155,107,155,0.5);
+  }
+
+  /* Playlist in panel */
+  .mp-playlist {
+    list-style: none;
+    max-height: 220px;
+    overflow-y: auto;
+    padding: 8px 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--pink-light) transparent;
+  }
+
+  .mp-playlist::-webkit-scrollbar { width: 4px; }
+  .mp-playlist::-webkit-scrollbar-thumb { background: var(--pink-light); border-radius: 2px; }
+
+  .mp-pl-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 18px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 0;
+  }
+
+  .mp-pl-item:hover { background: #faf5fa; }
+  .mp-pl-item.active { background: linear-gradient(90deg, rgba(201,160,201,0.15), rgba(143,175,192,0.1)); }
+
+  .mp-pl-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--pink-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700;
+    color: var(--pink-dark); flex-shrink: 0;
+  }
+
+  .mp-pl-item.active .mp-pl-num { background: var(--pink-dark); color: white; }
+
+  .mp-pl-info { flex: 1; min-width: 0; }
+  .mp-pl-title { font-size: 0.85rem; font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mp-pl-item.active .mp-pl-title { color: var(--pink-dark); }
+  .mp-pl-artist { font-size: 0.75rem; color: var(--text-gray); margin-top: 1px; }
+  .mp-pl-dur { font-size: 0.75rem; color: var(--text-gray); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- ========== INTRO SCREEN ========== -->
+<div id="intro-screen">
+
+  <!-- Animated wave background -->
+  <div class="intro-bg">
+    <svg class="ripple-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="blur1"><feGaussianBlur stdDeviation="30"/></filter>
+        <filter id="blur2"><feGaussianBlur stdDeviation="20"/></filter>
+      </defs>
+      <!-- soft blobs -->
+      <ellipse cx="200" cy="200" rx="340" ry="280" fill="#d5e8f2" opacity="0.5" filter="url(#blur1)">
+        <animateTransform attributeName="transform" type="translate" values="0,0; 40,30; -20,50; 0,0" dur="12s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="1200" cy="700" rx="380" ry="300" fill="#e8d5ee" opacity="0.45" filter="url(#blur1)">
+        <animateTransform attributeName="transform" type="translate" values="0,0; -50,-20; 30,40; 0,0" dur="14s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="700" cy="450" rx="500" ry="400" fill="#d0e5f0" opacity="0.3" filter="url(#blur2)">
+        <animateTransform attributeName="transform" type="translate" values="0,0; 30,-30; -40,20; 0,0" dur="18s" repeatCount="indefinite"/>
+      </ellipse>
+      <!-- ripple lines -->
+      <g opacity="0.12" stroke="#7aaac0" stroke-width="1" fill="none">
+        <ellipse cx="720" cy="450" rx="100" ry="60"><animate attributeName="rx" values="100;600;100" dur="6s" repeatCount="indefinite"/><animate attributeName="ry" values="60;360;60" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;0;0.5" dur="6s" repeatCount="indefinite"/></ellipse>
+        <ellipse cx="720" cy="450" rx="200" ry="120"><animate attributeName="rx" values="200;650;200" dur="6s" begin="1s" repeatCount="indefinite"/><animate attributeName="ry" values="120;390;120" dur="6s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.4;0;0.4" dur="6s" begin="1s" repeatCount="indefinite"/></ellipse>
+        <ellipse cx="720" cy="450" rx="300" ry="180"><animate attributeName="rx" values="300;680;300" dur="6s" begin="2s" repeatCount="indefinite"/><animate attributeName="ry" values="180;408;180" dur="6s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;0;0.3" dur="6s" begin="2s" repeatCount="indefinite"/></ellipse>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Falling petals -->
+  <div id="petals-container"></div>
+
+  <!-- Floating hearts (show after unlock) -->
+  <div class="float-hearts" id="floatHearts"></div>
+
+  <!-- Quiz card -->
+  <div class="quiz-card" id="quizCard">
+    <img class="quiz-photo" src="2.jpg" alt="Welcome">
+    <div class="quiz-body">
+      <div class="quiz-q">Biệt danh của lớp trưởng là gì?</div>
+      <div class="quiz-choices" id="quizChoices">
+        <button class="quiz-btn" onclick="checkAnswer(this, false)">A. Đại Ca</button>
+        <button class="quiz-btn" onclick="checkAnswer(this, false)">B. Bê Điệu</button>
+        <button class="quiz-btn" onclick="checkAnswer(this, false)">C. Sư Tử</button>
+        <button class="quiz-btn" onclick="checkAnswer(this, true)">D. Boss</button>
+      </div>
+    </div>
+
+    <!-- Wrong result -->
+    <div class="quiz-result" id="resultWrong">
+      <img class="result-gif" src="kashima-kotarou-gakuen-babysitters.gif" alt="">
+      <div class="result-title">Bạn không phải là thành viên của lớp này!</div>
+      <div class="result-sub">Thử lại xem nhé 😄</div>
+      <button class="result-btn retry" onclick="retryQuiz()">Thử lại</button>
+    </div>
+
+    <!-- Correct result -->
+    <div class="quiz-result" id="resultCorrect">
+      <div id="confettiOrigin" style="position:absolute;top:40%;left:50%;"></div>
+      <div class="result-mascot">🎉</div>
+      <div class="result-title">Chào mừng trở lại!</div>
+      <div class="result-sub">Cùng nhau ôn lại những kỷ niệm đẹp nào ✨</div>
+      <div class="result-countdown"><span id="cdNum">2</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Main site -->
+<div id="main-site">
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">Thanh Xuân</a>
+  <ul class="nav-links">
+    <li><a href="#home">Trang chủ</a></li>
+    <li><a href="#members">Thành viên</a></li>
+    <li><a href="#gallery">Khoảnh khắc</a></li>
+    <li><a href="#timeline">Dòng thời gian</a></li>
+    <li><a href="#messages">Lưu bút</a></li>
+    <li><a href="#" onclick="toggleMusicPanel(); return false;">🎵 Nhạc</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home" style="padding:0; max-width:100%; margin:0;">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1 class="hero-title reveal d1">Thanh Xuân Của Chúng Ta</h1>
+    <p class="hero-sub reveal d2">"Những năm tháng rực rỡ dưới mái trường thân yêu"</p>
+    <a href="#members" class="hero-btn reveal d3">Khám phá kỷ niệm</a>
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-mouse"></div>
+  </div>
+</section>
+
+<!-- MEMBERS -->
+<div id="members" style="background:white; padding: 90px 0;">
+  <h2 class="section-title" style="font-family:'Dancing Script',cursive; font-size:clamp(2rem,4vw,3rem); font-weight:700; text-align:center; margin-bottom:14px;">Thành Viên</h2>
+  <div class="section-divider"></div>
+
+  <div class="members-grid">
+    <div class="member-card reveal d1" onclick="openModal(0)">
+      <div class="member-img-wrap">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80" alt="Thành Bình">
+        <div class="member-hover-overlay">
+          <div class="member-quote">"Thanh xuân như một tách trà..."</div>
+          <div class="member-see-more">Xem chi tiết →</div>
+        </div>
+      </div>
+      <div class="member-name-wrap">
+        <div class="member-name">Thanh Bình</div>
+        <div class="member-nickname">Peace</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal d2" onclick="openModal(1)">
+      <div class="member-img-wrap">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=80" alt="Thu Ngân">
+        <div class="member-hover-overlay">
+          <div class="member-quote">"Mãi nhớ những ngày tháng này..."</div>
+          <div class="member-see-more">Xem chi tiết →</div>
+        </div>
+      </div>
+      <div class="member-name-wrap">
+        <div class="member-name">Thu Ngân</div>
+        <div class="member-nickname">Silver</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal d3" onclick="openModal(2)">
+      <div class="member-img-wrap">
+        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80" alt="Lê Chi">
+        <div class="member-hover-overlay">
+          <div class="member-quote">"Cùng nhau ta sẽ vượt qua tất cả"</div>
+          <div class="member-see-more">Xem chi tiết →</div>
+        </div>
+      </div>
+      <div class="member-name-wrap">
+        <div class="member-name">Lê Chi</div>
+        <div class="member-nickname">Chi Chi</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal d4" onclick="openModal(3)">
+      <div class="member-img-wrap">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" alt="Thanh Thái">
+        <div class="member-hover-overlay">
+          <div class="member-quote">"Học không chơi đánh rơi tuổi trẻ..."</div>
+          <div class="member-see-more">Xem chi tiết →</div>
+        </div>
+      </div>
+      <div class="member-name-wrap">
+        <div class="member-name">Thanh Thái</div>
+        <div class="member-nickname">Tom</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal d5" onclick="openModal(4)">
+      <div class="member-img-wrap">
+        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" alt="Tuấn Kiệt">
+        <div class="member-hover-overlay">
+          <div class="member-quote">"Tuổi trẻ không bao giờ trở lại"</div>
+          <div class="member-see-more">Xem chi tiết →</div>
+        </div>
+      </div>
+      <div class="member-name-wrap">
+        <div class="member-name">Tuấn Kiệt</div>
+        <div class="member-nickname">Jerry</div>
+      </div>
+    </div>
+
+    <div class="member-card reveal d6" onclick="openModal(5)">
+      <div class="member-img-wrap">
+        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=80" alt="Anh Pi">
+        <div class="member-hover-overlay">
+          <div class="member-quote">"Trùm trường là đây..."</div>
+          <div class="member-see-more">Xem chi tiết →</div>
+        </div>
+      </div>
+      <div class="member-name-wrap">
+        <div class="member-name">Minh Phương</div>
+        <div class="member-nickname">Anh Pi</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MEMBER MODAL -->
+<div class="modal-overlay" id="memberModal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <img class="modal-avatar" id="mAvatar" src="" alt="">
+    <div class="modal-fullname" id="mName"></div>
+    <div class="modal-nick" id="mNick"></div>
+    <hr class="modal-divider">
+    <div class="modal-field">
+      <div class="modal-icon">❤️</div>
+      <div>
+        <div class="modal-label">Sở thích</div>
+        <div class="modal-value" id="mHobby"></div>
+      </div>
+    </div>
+    <div class="modal-field">
+      <div class="modal-icon">💬</div>
+      <div>
+        <div class="modal-label">Lời nhắn</div>
+        <div class="modal-value" id="mMsg"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <h2 class="section-title">Khoảnh Khắc</h2>
+  <div class="section-divider"></div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item reveal d1"><img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=400&q=80" alt=""></div>
+    <div class="gallery-item reveal d2"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80" alt=""></div>
+    <div class="gallery-item reveal d3"><img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&q=80" alt=""></div>
+    <div class="gallery-item reveal d4"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=80" alt=""></div>
+    <div class="gallery-item reveal d1"><img src="https://images.unsplash.com/photo-1492538368677-f6e0afe31dcc?w=400&q=80" alt=""></div>
+    <div class="gallery-item reveal d2"><img src="https://images.unsplash.com/photo-1500380804539-4e1e8d83f3dc?w=400&q=80" alt=""></div>
+    <div class="gallery-item reveal d3"><img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&q=80" alt=""></div>
+    <div class="gallery-item reveal d4"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&q=80" alt=""></div>
+    <div class="gallery-item reveal d1"><img src="https://images.unsplash.com/photo-1544717305-996b815c338c?w=400&q=80" alt=""></div>
+    <div class="gallery-item reveal d2"><img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=400&q=80" alt=""></div>
+    <div class="gallery-item reveal d3"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&q=80" alt=""></div>
+    <div class="gallery-item reveal d4"><img src="https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=400&q=80" alt=""></div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<div id="timeline" style="background:white; padding: 90px 0;">
+  <h2 class="section-title" style="font-family:'Dancing Script',cursive; font-size:clamp(2rem,4vw,3rem); font-weight:700; text-align:center; margin-bottom:14px; padding:0 60px;">Dòng Thời Gian</h2>
+  <div class="section-divider"></div>
+
+  <div class="timeline-wrap">
+    <div class="timeline-line"></div>
+
+    <div class="timeline-item reveal from-left">
+      <div class="timeline-card">
+        <div class="timeline-month">Tháng 8, 2024</div>
+        <div class="timeline-event-title">Ngày Tựu Trường</div>
+        <div class="timeline-desc">Gặp lại bạn bè sau kỳ nghỉ hè, những câu chuyện chưa kể và tiếng cười rộn ràng khắp sân trường.</div>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+
+    <div class="timeline-item reveal from-right">
+      <div class="timeline-card">
+        <div class="timeline-month">Tháng 9, 2024</div>
+        <div class="timeline-event-title">Ngày Khai Giảng</div>
+        <div class="timeline-desc">Bắt đầu hành trình cuối cùng dưới mái trường với nghi lễ trang trọng và đầy cảm xúc.</div>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+
+    <div class="timeline-item reveal from-left">
+      <div class="timeline-card">
+        <div class="timeline-month">Tháng 10, 2024</div>
+        <div class="timeline-event-title">Hoạt Động Ngoại Khóa</div>
+        <div class="timeline-desc">Những buổi học ngoài lớp đầy mới mẻ, gắn kết và tràn ngập tiếng cười.</div>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+
+    <div class="timeline-item reveal from-right">
+      <div class="timeline-card">
+        <div class="timeline-month">Tháng 11, 2024</div>
+        <div class="timeline-event-title">Tri Ân Thầy Cô</div>
+        <div class="timeline-desc">Những đóa hoa thay lời muốn nói gửi đến những người lái đò thầm lặng.</div>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+
+    <div class="timeline-item reveal from-left">
+      <div class="timeline-card">
+        <div class="timeline-month">Tháng 12, 2024</div>
+        <div class="timeline-event-title">Giáng Sinh Ấm Áp</div>
+        <div class="timeline-desc">Lớp học rực rỡ sắc màu, cùng nhau trao nhau những món quà nhỏ và lời chúc an lành.</div>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+
+    <div class="timeline-item reveal from-right">
+      <div class="timeline-card">
+        <div class="timeline-month">Tháng 5, 2025</div>
+        <div class="timeline-event-title">Lễ Bế Giảng</div>
+        <div class="timeline-desc">Ngày chia tay đầy nước mắt và nụ cười, ôm nhau lần cuối dưới mái trường yêu thương.</div>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LUU BUT -->
+<section id="messages">
+  <h2 class="section-title">Lưu Bút</h2>
+  <div class="section-divider"></div>
+
+  <div class="notes-board" id="notesBoard">
+
+    <div class="note-wrap reveal d1">
+      <div class="sticky-note note-yellow">
+        <div class="note-pin pin-red"></div>
+        <div class="note-from">Gửi cả lớp</div>
+        <div class="note-text">Ba năm ngắn ngủi nhưng là cả một tuổi thơ. Cảm ơn các bạn đã cho mình những kỷ niệm đẹp nhất cuộc đời!</div>
+        <div class="note-sig">— Thanh Bình ✨</div>
+      </div>
+    </div>
+
+    <div class="note-wrap reveal d2">
+      <div class="sticky-note note-pink">
+        <div class="note-tape"></div>
+        <div class="note-from">Gửi những người bạn thân</div>
+        <div class="note-text">Mình nhớ những buổi chiều ngồi ở sân trường, nói đủ chuyện trên đời. Mãi là bạn thân nhé!</div>
+        <div class="note-sig">— Thu Ngân 🌸</div>
+      </div>
+    </div>
+
+    <div class="note-wrap reveal d3">
+      <div class="sticky-note note-blue">
+        <div class="note-pin pin-yellow"></div>
+        <div class="note-from">Gửi tất cả</div>
+        <div class="note-text">Tuổi trẻ chỉ một lần thôi, và mình may mắn được sống nó bên các bạn. Chúc mọi người luôn hạnh phúc!</div>
+        <div class="note-sig">— Lê Chi 💫</div>
+      </div>
+    </div>
+
+    <div class="note-wrap reveal d4">
+      <div class="sticky-note note-green">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(2deg)"></div>
+        <div class="note-from">Gửi thầy cô</div>
+        <div class="note-text">Cảm ơn thầy cô đã luôn kiên nhẫn và tận tụy. Những bài học không chỉ là kiến thức mà còn là bài học về cuộc sống.</div>
+        <div class="note-sig">— Tuấn Kiệt 🎓</div>
+      </div>
+    </div>
+
+    <div class="note-wrap reveal d5">
+      <div class="sticky-note note-purple">
+        <div class="note-pin pin-blue"></div>
+        <div class="note-from">Nhớ mãi kỷ niệm</div>
+        <div class="note-text">Còn nhớ hôm thi học kỳ, cả nhóm thức đêm ôn bài, cười như điên rồi lại lo như điên. Thật tuyệt vời!</div>
+        <div class="note-sig">— Thanh Thái 🌟</div>
+      </div>
+    </div>
+
+    <div class="note-wrap reveal d6">
+      <div class="sticky-note note-peach">
+        <div class="note-pin pin-purple"></div>
+        <div class="note-from">Lời cuối</div>
+        <div class="note-text">Thanh xuân này là của chúng ta — rực rỡ, bình yên và trọn vẹn yêu thương. Kỷ niệm sẽ mãi là báu vật trong tim.</div>
+        <div class="note-sig">— Minh Phương 🌺</div>
+      </div>
+    </div>
+
+    <div class="note-wrap reveal d1">
+      <div class="sticky-note note-blue">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(-3deg)"></div>
+        <div class="note-from">Gửi cả lớp mình</div>
+        <div class="note-text">Nhớ những buổi sáng chạy vào lớp trễ, nhìn thầy cô mà tim đập thình thịch. Giờ nghĩ lại chỉ biết cười thôi!</div>
+        <div class="note-sig">— Hải Yến 🎀</div>
+      </div>
+    </div>
+
+    <div class="note-wrap reveal d2">
+      <div class="sticky-note note-yellow">
+        <div class="note-pin pin-green"></div>
+        <div class="note-from">Kỷ niệm đáng nhớ</div>
+        <div class="note-text">Cái hôm cả lớp bị phạt đứng ngoài hành lang vì ồn ào, vậy mà vẫn cười ngặt nghẽo. Miss it so much!</div>
+        <div class="note-sig">— Bảo Châu 🌼</div>
+      </div>
+    </div>
+
+    <div class="note-wrap reveal d3">
+      <div class="sticky-note note-pink">
+        <div class="note-pin pin-red"></div>
+        <div class="note-from">Nhắn nhủ bạn bè</div>
+        <div class="note-text">Dù sau này mỗi người một ngả, mình tin chúng ta vẫn sẽ gặp lại nhau với nụ cười rạng rỡ nhất. Hẹn gặp lại!</div>
+        <div class="note-sig">— Quốc Huy 🚀</div>
+      </div>
+    </div>
+
+    <!-- hidden notes start here -->
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-green">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(1.5deg)"></div>
+        <div class="note-from">Gửi đứa bạn cùng bàn</div>
+        <div class="note-text">Cảm ơn mày đã cho tao chép bài suốt 3 năm nhé! Haha, đùa thôi, cảm ơn vì đã luôn ở cạnh khi tao cần.</div>
+        <div class="note-sig">— Minh Khoa 😄</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-peach">
+        <div class="note-pin pin-yellow"></div>
+        <div class="note-from">Lời tạm biệt</div>
+        <div class="note-text">Ngày bế giảng mình khóc nhiều lắm. Không phải vì buồn mà vì biết ơn — biết ơn vì được sống những ngày tháng đẹp như vậy.</div>
+        <div class="note-sig">— Lan Anh 🌷</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-purple">
+        <div class="note-pin pin-blue"></div>
+        <div class="note-from">Gửi thầy chủ nhiệm</div>
+        <div class="note-text">Thầy hay la rầy nhưng trong lòng mình biết thầy thương lớp mình lắm. Cảm ơn thầy đã đồng hành cùng tụi em!</div>
+        <div class="note-sig">— Ngọc Hân 💙</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-yellow">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(-2deg)"></div>
+        <div class="note-from">Kỷ niệm hội trại</div>
+        <div class="note-text">Đêm hội trại năm lớp 10, cả bọn thức đến 3 giờ sáng ca hát, đến giờ vẫn còn nhớ từng khoảnh khắc!</div>
+        <div class="note-sig">— Trung Hiếu 🔥</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-blue">
+        <div class="note-pin pin-red"></div>
+        <div class="note-from">Nhớ giờ ra chơi</div>
+        <div class="note-text">Những buổi ra chơi ngồi dưới gốc cây, chia nhau cái bánh mì, nói chuyện tào lao. Đơn giản mà hạnh phúc thật sự.</div>
+        <div class="note-sig">— Phương Linh 🌈</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-pink">
+        <div class="note-pin pin-purple"></div>
+        <div class="note-from">Gửi cả lớp yêu</div>
+        <div class="note-text">Tụi mình từng ghét nhau, từng hiểu lầm nhau rồi lại làm lành. Đó mới là tình bạn thật sự — vượt qua tất cả để ở lại bên nhau.</div>
+        <div class="note-sig">— Khánh Vy 💜</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-green">
+        <div class="note-pin pin-yellow"></div>
+        <div class="note-from">Gửi tương lai</div>
+        <div class="note-text">Dù mai này mỗi người đi một hướng, hãy nhớ rằng ở một góc ký ức, luôn có một lớp học nơi ta từng là những đứa trẻ rực rỡ nhất.</div>
+        <div class="note-sig">— Anh Tú 🌍</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-peach">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(2.5deg)"></div>
+        <div class="note-from">Kỷ niệm không quên</div>
+        <div class="note-text">Hôm thi HKII lớp 11, cả bọn nháo nhào chờ điểm. Khi kết quả ra, ôm nhau mừng rơi nước mắt. Nhớ lắm!</div>
+        <div class="note-sig">— Thiên Kim ⭐</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-purple">
+        <div class="note-pin pin-green"></div>
+        <div class="note-from">Lời nhắn nhỏ</div>
+        <div class="note-text">Cảm ơn những buổi sáng cùng đạp xe đến trường. Cảm ơn những tin nhắn đêm khuya. Cảm ơn vì đã là bạn của mình!</div>
+        <div class="note-sig">— Bích Ngọc 🎵</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-yellow">
+        <div class="note-pin pin-blue"></div>
+        <div class="note-from">Gửi cậu thủ khoa</div>
+        <div class="note-text">Học giỏi vậy mà vẫn không quên giúp tụi mình ôn bài. Cậu là niềm tự hào của cả lớp đó nhé!</div>
+        <div class="note-sig">— Đức Thịnh 📚</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-blue">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(-1.5deg)"></div>
+        <div class="note-from">Gửi ngày tháng cũ</div>
+        <div class="note-text">Mỗi lần nghe lại bài hát lớp mình hát ở văn nghệ, lại thấy nghẹn nghẹn. Những khoảnh khắc ấy không bao giờ quay trở lại nhưng sẽ mãi ở trong tim.</div>
+        <div class="note-sig">— Thùy Dung 🎤</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-pink">
+        <div class="note-pin pin-red"></div>
+        <div class="note-from">Nhớ giờ thể dục</div>
+        <div class="note-text">Giờ thể dục cả lớp giả vờ đau chân để không phải chạy, mà thầy biết hết mà vẫn cho qua. Thầy tốt lắm!</div>
+        <div class="note-sig">— Gia Hân 😂</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-green">
+        <div class="note-pin pin-purple"></div>
+        <div class="note-from">Gửi người hay ngủ gật</div>
+        <div class="note-text">Cậu ngủ gật trong giờ Sử mà vẫn trả lời được câu hỏi thầy hỏi. Đến giờ mình vẫn không hiểu tại sao!</div>
+        <div class="note-sig">— Quỳnh Như 😴</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-peach">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(-0.5deg)"></div>
+        <div class="note-from">Gửi hội cùng bàn ăn</div>
+        <div class="note-text">Bàn ăn của mình lúc nào cũng ồn nhất canteen! Cãi nhau xem hôm nay ăn gì, rồi cuối cùng cũng kéo nhau ra quán quen. Miss!!</div>
+        <div class="note-sig">— Xuân Mai 🍜</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-yellow">
+        <div class="note-pin pin-yellow"></div>
+        <div class="note-from">Cảm ơn lớp trưởng</div>
+        <div class="note-text">Làm lớp trưởng mà không bao giờ ép ai, luôn lắng nghe và giải quyết mọi chuyện êm đẹp. Cậu là keo dán của cả lớp đó!</div>
+        <div class="note-sig">— Hoàng Nam 👑</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-purple">
+        <div class="note-pin pin-green"></div>
+        <div class="note-from">Gửi hội drama</div>
+        <div class="note-text">Cả bọn mình hay tám chuyện sau giờ học lắm. Nhưng mà tám xong là quên hết, không để bụng bao giờ. Đó mới là bạn bè thật!</div>
+        <div class="note-sig">— Diễm Hương 🌺</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-blue">
+        <div class="note-pin pin-blue"></div>
+        <div class="note-from">Nhớ hôm khai giảng</div>
+        <div class="note-text">Hôm khai giảng lớp 12, nhìn quanh thấy ai cũng lớn hơn mà lòng lại thấy bịn rịn lạ. Biết rằng đây là năm cuối rồi…</div>
+        <div class="note-sig">— Trọng Nhân 🍃</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-pink">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(1deg)"></div>
+        <div class="note-from">Gửi hội hay trễ giờ</div>
+        <div class="note-text">Tụi mình hẹn 7 giờ mà 7 rưỡi mới tới, rồi đổ lỗi cho xe hết xăng, cho mưa to. Haha, cái bọn đáng yêu!</div>
+        <div class="note-sig">— Hồng Nhung 😆</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-green">
+        <div class="note-pin pin-red"></div>
+        <div class="note-from">Gửi những đêm ôn thi</div>
+        <div class="note-text">Những đêm gọi video ôn thi cùng nhau, mắt híp lại mà miệng vẫn đọc công thức. Cảm ơn vì đã không để mình chiến đấu một mình!</div>
+        <div class="note-sig">— Bảo Long 📖</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-peach">
+        <div class="note-pin pin-purple"></div>
+        <div class="note-from">Gửi cả lớp</div>
+        <div class="note-text">Cảm ơn lớp mình đã có những cuộc tranh luận nảy lửa rồi lại cười xòa. Cảm ơn vì không bao giờ để ai cảm thấy bị bỏ lại phía sau.</div>
+        <div class="note-sig">— Yến Nhi 💕</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-yellow">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(-2.5deg)"></div>
+        <div class="note-from">Kỷ niệm văn nghệ</div>
+        <div class="note-text">Tiết mục của lớp mình ở hội diễn bị quên lời giữa chừng, cả nhóm nhìn nhau rồi ứng xử ngẫu hứng. Khán giả vỗ tay nhiệt liệt nhất đêm đó!</div>
+        <div class="note-sig">— Minh Tú 🎭</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-purple">
+        <div class="note-pin pin-yellow"></div>
+        <div class="note-from">Nhắn bạn cùng nhóm</div>
+        <div class="note-text">Làm bài nhóm với cậu vừa vui vừa loạn, vậy mà điểm lại cao nhất lớp. Bộ đôi bất bại! Hẹn hợp tác lần sau nhé!</div>
+        <div class="note-sig">— Gia Linh 🤝</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-blue">
+        <div class="note-pin pin-green"></div>
+        <div class="note-from">Gửi người hay kể chuyện cười</div>
+        <div class="note-text">Cậu là linh hồn của cả lớp. Buổi học nào cũng có cậu làm cả lớp cười bể bụng. Nhờ cậu mà những ngày khó khăn trở nên nhẹ nhàng hơn rất nhiều!</div>
+        <div class="note-sig">— Thanh Tùng 😂</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-pink">
+        <div class="note-pin pin-blue"></div>
+        <div class="note-from">Gửi ngày mai</div>
+        <div class="note-text">Mỗi bước chúng ta đi tới, hãy nhớ rằng mình từng có một nơi gọi là nhà — đó là lớp học nhỏ với những người bạn tuyệt vời nhất đời!</div>
+        <div class="note-sig">— Thu Hà 🌙</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-green">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(0.5deg)"></div>
+        <div class="note-from">Nhớ giờ Văn</div>
+        <div class="note-text">Giờ Văn cô hay hỏi cảm xúc, cả lớp im thin thít. Ai ngờ sau này lớn lên lại hiểu sâu từng bài thơ hồi đó. Cô dạy hay lắm!</div>
+        <div class="note-sig">— Phước An 📝</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-peach">
+        <div class="note-pin pin-red"></div>
+        <div class="note-from">Gửi những đứa xa nhà</div>
+        <div class="note-text">Mình đến từ tỉnh khác, sợ lắm khi bước vào lớp ngày đầu. Vậy mà lớp mình đón mình như người nhà luôn. Cảm ơn, mãi không quên!</div>
+        <div class="note-sig">— Nguyên Khang 🏡</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-yellow">
+        <div class="note-pin pin-purple"></div>
+        <div class="note-from">Gửi cả lớp thân yêu</div>
+        <div class="note-text">Dù vui hay buồn, dù thành công hay thất bại, hãy nhớ rằng ở đây luôn có những người sẵn sàng nghe và đồng hành cùng bạn. Yêu cả lớp!</div>
+        <div class="note-sig">— Hà Trang 💗</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-purple">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(-1deg)"></div>
+        <div class="note-from">Kỷ niệm chụp kỷ yếu</div>
+        <div class="note-text">Ngày chụp kỷ yếu ai cũng diện đồ đẹp, makeup kỹ, vậy mà tấm ảnh đẹp nhất lại là lúc cả bọn vừa cười vừa té lên nhau!</div>
+        <div class="note-sig">— Kim Chi 📸</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-blue">
+        <div class="note-pin pin-yellow"></div>
+        <div class="note-from">Gửi hội nghịch nhất lớp</div>
+        <div class="note-text">Tụi mình hay bị réo tên nhất trong giờ học, nhưng cũng là những đứa vui nhộn nhất lớp. Không có tụi mình lớp chắc buồn lắm! Hehe!</div>
+        <div class="note-sig">— Duy Khang 😜</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-pink">
+        <div class="note-pin pin-green"></div>
+        <div class="note-from">Gửi lớp mình</div>
+        <div class="note-text">Cảm ơn lớp mình đã cho mình biết rằng tình bạn không phụ thuộc vào khoảng cách hay thời gian. Chỉ cần một tin nhắn thôi là tất cả lại gần nhau ngay!</div>
+        <div class="note-sig">— Vân Anh 🌟</div>
+      </div>
+    </div>
+
+    <div class="note-wrap note-hidden">
+      <div class="sticky-note note-peach">
+        <div class="note-tape" style="transform:translateX(-50%) rotate(3deg)"></div>
+        <div class="note-from">Lời kết</div>
+        <div class="note-text">Thanh xuân đẹp nhất không phải vì chúng ta hoàn hảo, mà vì chúng ta đã sống hết mình bên những người xứng đáng. Yêu lớp mình nhiều lắm!</div>
+        <div class="note-sig">— Lớp 12A ❤️</div>
+      </div>
+    </div>
+
+    <!-- Show more button row -->
+    <div class="notes-show-more-wrap" id="showMoreWrap">
+      <button class="notes-show-more-btn" id="showMoreBtn" onclick="toggleNotes()">
+        📌 Xem thêm 32 lưu bút
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Thanh Xuân</div>
+  <p>© 2025 Thanh Xuân Của Chúng Ta · Kỷ Yếu Lớp 12</p>
+  <p style="margin-top:6px; font-size:0.8rem; opacity:0.5;">"Những năm tháng rực rỡ dưới mái trường thân yêu"</p>
+</footer>
+
+<!-- MUSIC POPUP PANEL -->
+<div id="music-panel">
+  <div class="mp-header">
+    <span class="mp-header-icon">🎶</span>
+    <span class="mp-header-title">Danh sách nhạc</span>
+    <button class="mp-close" onclick="toggleMusicPanel()">✕</button>
+  </div>
+
+  <div class="mp-now">
+    <div class="mp-now-disc" id="mpDisc">♪</div>
+    <div class="mp-now-info">
+      <div class="mp-now-title" id="mpNowTitle">Thanh Xuân Của Chúng Ta</div>
+      <div class="mp-now-sub" id="mpNowArtist">Bài hát kỷ niệm</div>
+    </div>
+  </div>
+
+  <div class="mp-controls">
+    <button class="mp-ctrl-btn" onclick="prevTrack()" title="Bài trước">⏮</button>
+    <button class="mp-play-btn" id="mpPlayBtn" onclick="togglePlay()">▶</button>
+    <button class="mp-ctrl-btn" onclick="nextTrack()" title="Bài tiếp">⏭</button>
+  </div>
+
+  <ul class="mp-playlist" id="mpPlaylist">
+    <li class="mp-pl-item active" onclick="selectTrack(0)">
+      <div class="mp-pl-num">♪</div>
+      <div class="mp-pl-info">
+        <div class="mp-pl-title">Thanh Xuân Của Chúng Ta</div>
+        <div class="mp-pl-artist">Bài hát kỷ niệm</div>
+      </div>
+      <div class="mp-pl-dur">3:45</div>
+    </li>
+    <li class="mp-pl-item" onclick="selectTrack(1)">
+      <div class="mp-pl-num">2</div>
+      <div class="mp-pl-info">
+        <div class="mp-pl-title">Phượng Hồng</div>
+        <div class="mp-pl-artist">Nhạc truyền thống</div>
+      </div>
+      <div class="mp-pl-dur">4:12</div>
+    </li>
+    <li class="mp-pl-item" onclick="selectTrack(2)">
+      <div class="mp-pl-num">3</div>
+      <div class="mp-pl-info">
+        <div class="mp-pl-title">Mãi Mãi Bên Nhau</div>
+        <div class="mp-pl-artist">Nhạc lớp</div>
+      </div>
+      <div class="mp-pl-dur">3:58</div>
+    </li>
+    <li class="mp-pl-item" onclick="selectTrack(3)">
+      <div class="mp-pl-num">4</div>
+      <div class="mp-pl-info">
+        <div class="mp-pl-title">Tháng Năm Rực Rỡ</div>
+        <div class="mp-pl-artist">OST phim</div>
+      </div>
+      <div class="mp-pl-dur">4:30</div>
+    </li>
+    <li class="mp-pl-item" onclick="selectTrack(4)">
+      <div class="mp-pl-num">5</div>
+      <div class="mp-pl-info">
+        <div class="mp-pl-title">Hương Mùa Hè</div>
+        <div class="mp-pl-artist">Bài hát kỷ niệm</div>
+      </div>
+      <div class="mp-pl-dur">3:22</div>
+    </li>
+  </ul>
+</div>
+
+</div><!-- /#main-site -->
+
+<script>
+/* ========== INTRO: PETALS ========== */
+const petalColors = ['#f7c5d5','#c5d8f7','#d5c5f7','#c5f7d8','#f7e8c5'];
+const container = document.getElementById('petals-container');
+for (let i = 0; i < 22; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.style.cssText = `
+    left: ${Math.random()*100}%;
+    top: ${Math.random()*100}%;
+    background: ${petalColors[Math.floor(Math.random()*petalColors.length)]};
+    width: ${6+Math.random()*10}px;
+    height: ${8+Math.random()*14}px;
+    animation-duration: ${5+Math.random()*8}s;
+    animation-delay: ${Math.random()*6}s;
+    transform: rotate(${Math.random()*360}deg);
+    border-radius: ${Math.random()>0.5?'50% 0 50% 0':'50%'};
+  `;
+  container.appendChild(p);
+}
+
+/* ========== INTRO: FLOATING HEARTS ========== */
+const heartsEl = document.getElementById('floatHearts');
+const heartEmojis = ['🌸','✨','💕','🌷','⭐','💫'];
+for (let i = 0; i < 14; i++) {
+  const h = document.createElement('span');
+  h.className = 'fheart';
+  h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+  h.style.cssText = `
+    left: ${Math.random()*100}%;
+    bottom: -5%;
+    font-size: ${0.8+Math.random()*1.2}rem;
+    animation-duration: ${7+Math.random()*10}s;
+    animation-delay: ${Math.random()*8}s;
+  `;
+  heartsEl.appendChild(h);
+}
+
+/* ========== INTRO: QUIZ LOGIC ========== */
+let wrongCount = 0;
+
+function checkAnswer(btn, isCorrect) {
+  // Disable all buttons
+  document.querySelectorAll('.quiz-btn').forEach(b => b.style.pointerEvents = 'none');
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    setTimeout(() => {
+      spawnConfetti();
+      heartsEl.classList.add('show');
+      document.getElementById('resultCorrect').classList.add('show');
+      // auto-transition after 2s countdown
+      let n = 2;
+      const cdEl = document.getElementById('cdNum');
+      const tick = setInterval(() => {
+        n--;
+        if (cdEl) cdEl.textContent = n;
+        if (n <= 0) { clearInterval(tick); enterSite(); }
+      }, 1000);
+    }, 500);
+  } else {
+    wrongCount++;
+    btn.classList.add('wrong');
+    setTimeout(() => {
+      document.getElementById('resultWrong').classList.add('show');
+    }, 500);
+  }
+}
+
+function retryQuiz() {
+  document.getElementById('resultWrong').classList.remove('show');
+  document.querySelectorAll('.quiz-btn').forEach(b => {
+    b.classList.remove('wrong', 'correct');
+    b.style.pointerEvents = '';
+  });
+}
+
+function spawnConfetti() {
+  const origin = document.getElementById('confettiOrigin');
+  const rect = origin.getBoundingClientRect();
+  const colors = ['#f7a8c4','#a8c4f7','#a8f7c4','#f7c4a8','#c4a8f7','#f7f7a8'];
+  for (let i = 0; i < 30; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    const angle = (Math.random() * 360) * Math.PI / 180;
+    const dist = 80 + Math.random() * 160;
+    c.style.cssText = `
+      left: ${rect.left}px; top: ${rect.top}px;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      --dx: ${Math.cos(angle)*dist}px;
+      --dy: ${Math.sin(angle)*dist - 60}px;
+      animation-duration: ${0.7+Math.random()*0.6}s;
+      animation-delay: ${Math.random()*0.2}s;
+      width: ${6+Math.random()*8}px; height: ${6+Math.random()*8}px;
+      border-radius: ${Math.random()>0.5?'50%':'3px'};
+    `;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 1400);
+  }
+}
+
+function enterSite() {
+  const intro    = document.getElementById('intro-screen');
+  const mainSite = document.getElementById('main-site');
+
+  // intro fades + scales out
+  intro.classList.add('exit');
+
+  // main site fades+slides up behind it
+  mainSite.classList.add('visible');
+  document.body.style.overflow = '';
+
+  // hero text stagger reveal after intro gone
+  setTimeout(() => {
+    intro.style.display = 'none';
+    document.querySelectorAll('#home .reveal').forEach(el => el.classList.add('visible'));
+  }, 1000);
+}
+
+// Lock scroll while intro is showing
+document.body.style.overflow = 'hidden';
+
+/* ========== SCROLL-REVEAL ========== */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ========== MEMBER MODAL ========== */
+const members = [
+  {
+    name: 'Thanh Bình', nick: 'Peace',
+    img: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80',
+    hobby: 'Chụp ảnh, du lịch',
+    msg: 'Mãi là bạn thân nhé!'
+  },
+  {
+    name: 'Thu Ngân', nick: 'Silver',
+    img: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=200&q=80',
+    hobby: 'Đọc sách, nghe nhạc',
+    msg: 'Nhớ mãi kỷ niệm bên nhau!'
+  },
+  {
+    name: 'Lê Chi', nick: 'Chi Chi',
+    img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80',
+    hobby: 'Vẽ tranh, làm bánh',
+    msg: 'Chúc mọi người luôn vui vẻ!'
+  },
+  {
+    name: 'Thanh Thái', nick: 'Tom',
+    img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80',
+    hobby: 'Chơi bóng đá, gaming',
+    msg: 'Tuổi trẻ thật đẹp!'
+  },
+  {
+    name: 'Tuấn Kiệt', nick: 'Jerry',
+    img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&q=80',
+    hobby: 'Âm nhạc, lập trình',
+    msg: 'Hẹn gặp lại ở tương lai!'
+  },
+  {
+    name: 'Minh Phương', nick: 'Anh Pi',
+    img: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=200&q=80',
+    hobby: 'Đi phượt, nấu ăn',
+    msg: 'Cảm ơn cả lớp đã có những năm tháng tuyệt vời!'
+  }
+];
+
+function openModal(i) {
+  const m = members[i];
+  document.getElementById('mAvatar').src = m.img;
+  document.getElementById('mName').textContent = m.name;
+  document.getElementById('mNick').textContent = m.nick;
+  document.getElementById('mHobby').textContent = m.hobby;
+  document.getElementById('mMsg').textContent = m.msg;
+  document.getElementById('memberModal').classList.add('open');
+}
+
+function closeModalBtn() {
+  document.getElementById('memberModal').classList.remove('open');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('memberModal')) closeModalBtn();
+}
+
+/* ========== PLAYLIST ========== */
+document.querySelectorAll('.playlist-item').forEach((item, i) => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.playlist-item').forEach((el, j) => {
+      el.classList.remove('active');
+      el.querySelector('.pl-num').textContent = j + 1;
+    });
+    item.classList.add('active');
+    item.querySelector('.pl-num').textContent = '♪';
+  });
+});
+
+/* ========== NOTES SHOW MORE ========== */
+let notesExpanded = false;
+function toggleNotes() {
+  notesExpanded = !notesExpanded;
+  const hidden = document.querySelectorAll('.note-wrap.note-hidden');
+  const btn    = document.getElementById('showMoreBtn');
+  const wrap   = document.getElementById('showMoreWrap');
+
+  hidden.forEach((el, i) => {
+    if (notesExpanded) {
+      el.style.display = 'flex';
+      // stagger reveal
+      setTimeout(() => el.classList.add('visible'), i * 40);
+    } else {
+      el.style.display = 'none';
+      el.classList.remove('visible');
+    }
+  });
+
+  btn.textContent = notesExpanded
+    ? '🔼 Thu gọn lưu bút'
+    : '📌 Xem thêm 32 lưu bút';
+
+  // Move show-more button to end of grid
+  if (notesExpanded) {
+    wrap.style.marginTop = '10px';
+  }
+}
+
+/* ========== FLOATING MUSIC PANEL ========== */
+const tracks = [
+  { title: 'Thanh Xuân Của Chúng Ta', artist: 'Bài hát kỷ niệm', dur: '3:45' },
+  { title: 'Phượng Hồng',             artist: 'Nhạc truyền thống', dur: '4:12' },
+  { title: 'Mãi Mãi Bên Nhau',        artist: 'Nhạc lớp',          dur: '3:58' },
+  { title: 'Tháng Năm Rực Rỡ',        artist: 'OST phim',          dur: '4:30' },
+  { title: 'Hương Mùa Hè',            artist: 'Bài hát kỷ niệm',  dur: '3:22' },
+];
+
+let mpCurrentTrack = 0;
+let mpIsPlaying = false;
+let mpPanelOpen = false;
+
+function toggleMusicPanel() {
+  mpPanelOpen = !mpPanelOpen;
+  document.getElementById('music-panel').classList.toggle('open', mpPanelOpen);
+}
+
+function selectTrack(idx) {
+  mpCurrentTrack = idx;
+  updateMpUI();
+  mpIsPlaying = true;
+  applyPlayState();
+}
+
+function prevTrack() {
+  mpCurrentTrack = (mpCurrentTrack - 1 + tracks.length) % tracks.length;
+  updateMpUI();
+}
+
+function nextTrack() {
+  mpCurrentTrack = (mpCurrentTrack + 1) % tracks.length;
+  updateMpUI();
+}
+
+function togglePlay() {
+  mpIsPlaying = !mpIsPlaying;
+  applyPlayState();
+}
+
+function applyPlayState() {
+  const playBtn = document.getElementById('mpPlayBtn');
+  const disc    = document.getElementById('mpDisc');
+  playBtn.textContent = mpIsPlaying ? '⏸' : '▶';
+  disc.classList.toggle('spinning', mpIsPlaying);
+}
+
+function updateMpUI() {
+  const t = tracks[mpCurrentTrack];
+  document.getElementById('mpNowTitle').textContent  = t.title;
+  document.getElementById('mpNowArtist').textContent = t.artist;
+
+  const items = document.querySelectorAll('.mp-pl-item');
+  items.forEach((el, i) => {
+    const num = el.querySelector('.mp-pl-num');
+    el.classList.toggle('active', i === mpCurrentTrack);
+    num.textContent = i === mpCurrentTrack ? '♪' : (i + 1);
+  });
+}
+
+const navSections = ['home', 'members', 'gallery', 'timeline', 'messages'];
+window.addEventListener('scroll', () => {
+  let current = '';
+  navSections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>
